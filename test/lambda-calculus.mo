@@ -1,7 +1,3 @@
-// compile and run with
-// ../src/moc -wasi-system-api --package stdlib ../../stdlib/src lambda-calculus.mo && wasmtime lambda-calculus.wasm
-
-
 import Debug "mo:stdlib/Debug";
 import Iter "mo:stdlib/Iter";
 import List "mo:stdlib/List";
@@ -78,7 +74,7 @@ module Lexer = {
 
     func ident(f : Text -> Token) : P.Parser<Char,Token> {
       P.map(
-        P.right(cp.spaces, P.cons(cp.letter, P.many(cp.alpha_num))),
+        P.right(cp.spaces, P.cons(cp.letter, P.many(cp.alphaNum))),
         func (cs : List.List<Char>) : Token { f (P.implode(cs)) });
     };
 

@@ -16,8 +16,9 @@ and types are largely preserved (modulo naming conventions and uncurrying).
 
 Since Motoko does not have symbolic identifiers, symbolic Opal combinators are explicitly named in `Parsec.mo`. Here's a rough guide:
 
+
 | Opal | Parsec  |
-====================
+|------|---------|
 | `>>=` | `bind` |
 | `<|>` | `choose` |
 | `=>`  | `map` |
@@ -121,6 +122,8 @@ module {
 
  pair : <Token, A, B>(Parser<Token, A>, Parser<Token, B>) -> Parser<Token, (A, B)>;
 
+ parse : <Token, A>(Parser<Token, A>, LazyStream.t<Token>) -> ?A;
+
  range : <Token>((Token, Token) -> Bool, Token, Token) -> Parser<Token, Token>;
 
  ret : <Token, A>A -> Parser<Token, A>;
@@ -141,11 +144,11 @@ module {
 
  type CharParsers = {
 
-  alpha_num : Input<Char> -> Monad<Char, Char>;
+  alphaNum : Input<Char> -> Monad<Char, Char>;
 
   digit : Input<Char> -> Monad<Char, Char>;
 
-  hex_digit : Input<Char> -> Monad<Char, Char>;
+  hexDigit : Input<Char> -> Monad<Char, Char>;
 
   letter : Input<Char> -> Monad<Char, Char>;
 
@@ -155,7 +158,7 @@ module {
 
   newline : Input<Char> -> Monad<Char, Char>;
 
-  oct_digit : Input<Char> -> Monad<Char, Char>;
+  octDigit : Input<Char> -> Monad<Char, Char>;
 
   space : Input<Char> -> Monad<Char, Char>;
 

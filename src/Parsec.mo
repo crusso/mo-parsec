@@ -23,7 +23,6 @@ import Char "mo:stdlib/Char";
 import Debug "mo:stdlib/Debug";
 import Iter "mo:stdlib/Iter";
 import List "mo:stdlib/List";
-import Prim "mo:prim";
 import Text "mo:stdlib/Text";
 
 module {
@@ -86,6 +85,13 @@ module {
     List.rev(l);
   };
 
+  public func parse<Token, A>(pa : Parser<Token,A>, input: LazyStream.t<Token>) : ? A {
+    switch (pa input) {
+      case (? (res, _)) (? res);
+      case null null;
+    }
+  };
+ 
   public type Input<Token> = LazyStream.t<Token>;
 
   public type Monad<Token, Result> = ?(Result, Input<Token>);
@@ -368,14 +374,14 @@ module {
 
     public let letter : Parser<Char, Char> = choose(lower, upper);
 
-    public let alpha_num : Parser<Char, Char> = choose(letter, digit);
+    public let alphaNum : Parser<Char, Char> = choose(letter, digit);
 
-    public let hex_digit : Parser<Char, Char> =
+    public let hexDigit : Parser<Char, Char> =
       choose(range(leq, 'a', 'f'),
         choose (range(leq, 'A', 'F'),
           digit));
 
-    public let oct_digit : Parser<Char, Char> = range(leq, '0', '7');
+    public let octDigit : Parser<Char, Char> = range(leq, '0', '7');
 
     public func lexeme<A>(pa : Parser<Char, A>) : Parser<Char, A> {
       right(spaces, pa)
