@@ -5,7 +5,7 @@ A Parsec based parser combinator library for Motoko.
 This is a minimal parsec implementation based directly on a port, from OCaml, of
 [Opal](0), which is itself derived from Haskell's influential [Parsec](1) library.
 
-The library and example was implemented primarilly to exercise Motoko new type argument inference, but may be of more general use.
+The library and example was implemented primarily to exercise Motoko new type argument inference, but may be of more general use.
 
 * [src](src) contains the [`Parsec`](src/Parsec.mo) library.
 * [test](test) contains a sample lambda calculus lexer and parser that you can run with wasmtime.
@@ -36,7 +36,7 @@ Since Motoko does not have symbolic identifiers, symbolic Opal combinators are e
 | `<<`  | `left` |
 | `<~>` | `cons` |
 
-Opal functions that rely on OCaml's polymorphic equality and comparision require additional arguments in Parsec. Some Opal combinators taking OCaml lists
+Opal functions that rely on OCaml's polymorphic equality and comparison require additional arguments in Parsec. Some Opal combinators taking OCaml lists
 take Motoko immutable arrays instead (e.g. `choice`).
 
 

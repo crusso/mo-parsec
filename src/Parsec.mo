@@ -10,13 +10,10 @@
 // not terrible, but see comments and remaining explicit instantiations
 
 // Lesson: we often have to choose between argument type inference and
-// unnotated anonymous function arguments. Why? type argument nference relies on
-// inferring argument types but implicit function typing relies on
-// checking the function against an expect argument type.
+// unnotated anonymous function arguments. Why? Type argument inference relies on
+// synthesizing argument types but implicit function typing relies on
+// checking (not synthesizing) a function against an expected function type.
 // Choose your poison.
-
-// compile with
-// ../src/moc --package stdlib ../stdlib/src parsec.mo
 
 import Array "mo:stdlib/Array";
 import Char "mo:stdlib/Char";
@@ -24,6 +21,7 @@ import Debug "mo:stdlib/Debug";
 import Iter "mo:stdlib/Iter";
 import List "mo:stdlib/List";
 import Text "mo:stdlib/Text";
+import Prim "mo:prim"; // TODO: remove me once Char.toText available
 
 module {
 
@@ -72,7 +70,7 @@ module {
   public func implode(cs : List.List<Char>) : Text =
   { var t = "";
     for (c in Iter.fromList cs) {
-      t #= Char.toText c
+      t #= Prim.charToText c
     };
     t
   };
