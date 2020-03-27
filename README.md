@@ -3,7 +3,7 @@
 A Parsec based parser combinator library for Motoko.
 
 This is a minimal parsec implementation based directly on a port, from OCaml, of
-[Opal][https://github.com/pyrocat101/opal/], which is itself derived from Haskell's influential [Parsec][1] library.
+[Opal](0), which is itself derived from Haskell's influential [Parsec](1) library.
 
 The library and example was implemented primarilly to exercise Motoko new type argument inference, but may be of more general use.
 
@@ -21,7 +21,7 @@ to build the sample; you may need to edit the `Makefile` to suit your installati
 ## Documentation
 
 There is currently no documentation, but see
-[Opal's README][https://github.com/pyrocat101/opal/README.md] for a good overview of the available combinators, whose names
+Opal's [README](https://github.com/pyrocat101/opal/README.md) for a good overview of the available combinators, whose names
 and types are largely preserved (modulo naming conventions and uncurrying).
 
 Since Motoko does not have symbolic identifiers, symbolic Opal combinators are explicitly named in `Parsec.mo`. Here's a rough guide:
@@ -44,9 +44,13 @@ take Motoko immutable arrays instead (e.g. `choice`).
 
 The library is not well-tested, use at your own risk.
 
+## References & Credits
+
+[0] https://github.com/pyrocat101/opal
 
 [1] https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/parsec-paper-letter.pdf
 
+Thanks to Christoph Hegemann for the lambda calculus sample and feedback.
 
 ## API
 
