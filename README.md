@@ -7,8 +7,18 @@ This is a minimal parsec implementation based directly on a port, from OCaml, of
 
 The library and example was implemented primarilly to exercise Motoko new type argument inference, but may be of more general use.
 
-* [src](src) contains the [`Parsec` library](src/Parsec.mo)
+* [src](src) contains the [`Parsec`](src/Parsec.mo) library.
 * [test](test) contains a sample lambda calculus lexer and parser that you can run with wasmtime.
+
+# Building
+
+```
+cd test; make
+```
+
+to build the sample; you may need to edit the `Makefile` to suit your installation.
+
+# Documentation
 
 There is currently no documentation, but see
 [Opal's README][https://github.com/pyrocat101/opal/README.md] for a good overview of the available combinators, whose names
