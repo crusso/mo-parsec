@@ -20,7 +20,7 @@ Since Motoko does not have symbolic identifiers, symbolic Opal combinators are e
 | Opal | Parsec  |
 |------|---------|
 | `>>=` | `bind` |
-| `<|>` | `choose` |
+| `<\|>` | `choose` |
 | `=>`  | `map` |
 | `>>`  | `right` |
 | `<<`  | `left` |
