@@ -10,7 +10,7 @@ The library and example was implemented primarilly to exercise Motoko new type a
 * [src](src) contains the [`Parsec`](src/Parsec.mo) library.
 * [test](test) contains a sample lambda calculus lexer and parser that you can run with wasmtime.
 
-# Building
+## Building
 
 ```
 cd test; make
@@ -18,7 +18,7 @@ cd test; make
 
 to build the sample; you may need to edit the `Makefile` to suit your installation.
 
-# Documentation
+## Documentation
 
 There is currently no documentation, but see
 [Opal's README][https://github.com/pyrocat101/opal/README.md] for a good overview of the available combinators, whose names
