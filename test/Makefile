@@ -1,17 +1,11 @@
-# Makefile for motoko  demos
-
-# This works with bash
-
-MOC?=~/motoko/src/moc
-STDLIB?=~/motoko/stdlib/src
+MOC ?= ./moc
+PKGS=$(shell vessel sources)
 # we need to specify the output if there is more than one .mo file
 OUT=lambda-calculus.wasm
 
-SAMPLES:= test
-
 all:
-	$(MOC) --package stdlib $(STDLIB) -wasi-system-api lambda-calculus.mo
-	wasmtime lambda-calculus.wasm
+	$(MOC) $(PKGS) -wasi-system-api lambda-calculus.mo
+	wasmtime $(OUT)
 
 clean:
 	rm -f $(OUT)

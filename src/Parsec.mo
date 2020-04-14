@@ -15,12 +15,12 @@
 // checking (not synthesizing) a function against an expected function type.
 // Choose your poison.
 
-import Array "mo:stdlib/Array";
-import Char "mo:stdlib/Char";
-import Debug "mo:stdlib/Debug";
-import Iter "mo:stdlib/Iter";
-import List "mo:stdlib/List";
-import Text "mo:stdlib/Text";
+import Array "mo:base/Array";
+import Char "mo:base/Char";
+import Debug "mo:base/Debug";
+import Iter "mo:base/Iter";
+import List "mo:base/List";
+import Text "mo:base/Text";
 import Prim "mo:prim"; // TODO: remove me once Char.toText available
 
 module {
