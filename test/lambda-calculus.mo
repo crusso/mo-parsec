@@ -1,6 +1,6 @@
-import Debug "mo:stdlib/Debug";
-import Iter "mo:stdlib/Iter";
-import List "mo:stdlib/List";
+import Debug "mo:base/Debug";
+import Iter "mo:base/Iter";
+import List "mo:base/List";
 
 import P "../src/Parsec";
 
