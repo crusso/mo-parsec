@@ -1,13 +1,13 @@
 // mini parsec implementation based on OCaml opal
 //  https://github.com/pyrocat101/opal/
-// implemented to exercise motoko argument type inference
+// implemented to exercise Motoko argument type inference
 
 // Some deviations due to lack of polymorphic comparison, meaning we need to pass
 // eq and leq functions to the singleton combinators (see below)
 // We typically use tuples (e.g. bind), not currying (eg. Opal's choose),
 // but could uniformly refactor to either as in Ocaml.
 
-// not terrible, but see comments and remaining explicit instantiations
+// Not terrible, but see comments and remaining explicit instantiations.
 
 // Lesson: we often have to choose between argument type inference and
 // unnotated anonymous function arguments. Why? Type argument inference relies on
@@ -21,7 +21,6 @@ import Debug "mo:base/Debug";
 import Iter "mo:base/Iter";
 import List "mo:base/List";
 import Text "mo:base/Text";
-import Prim "mo:prim"; // TODO: remove me once Char.toText available
 
 module {
 
@@ -29,13 +28,13 @@ module {
     public class t<A>(f : () -> A) {
       var state : { #delay : (() -> A); #result : A}
              // ^ required for correct store typing
-          = #delay f;
-      public func force(): A {
-          switch state {
-            case (#delay f) { let r = f(); state := #result r; return r; };
-            case (#result r) { return r; };
-          }
-        };
+        = #delay f;
+      public func force() : A {
+        switch state {
+          case (#delay f) { let r = f(); state := #result r; return r; };
+          case (#result r) { return r; };
+        }
+      };
     };
   };
 
@@ -55,22 +54,22 @@ module {
     public func ofFunc<A>(f : () -> ?A) : t<A> {
       func next(f : () -> ?A) : t<A> {
         switch (f ()) {
-        case (?a) (?(a, Lazy.t(func () : t<A> { next f; })));
-        case null null
+          case (?a) (?(a, Lazy.t(func () : t<A> { next f; })));
+          case null null
         };
       };
       next f
     };
 
-    public func ofText(t : Text) : t<Char> = ofIter(Text.toIter t);
+    public func ofText(t : Text) : t<Char> { ofIter(Text.toIter t) };
   };
 
   // utils
 
-  public func implode(cs : List.List<Char>) : Text =
-  { var t = "";
+  public func implode(cs : List.List<Char>) : Text {
+    var t = "";
     for (c in Iter.fromList cs) {
-      t #= Prim.charToText c
+      t #= Char.toText(c)
     };
     t
   };
@@ -80,16 +79,16 @@ module {
     for (c in t.chars()){
         l := List.push(c, l);
     };
-    List.rev(l);
+    List.reverse(l);
   };
 
-  public func parse<Token, A>(pa : Parser<Token,A>, input: LazyStream.t<Token>) : ? A {
+  public func parse<Token, A>(pa : Parser<Token, A>, input: LazyStream.t<Token>) : ? A {
     switch (pa input) {
       case (? (res, _)) (? res);
       case null null;
     }
   };
- 
+
   public type Input<Token> = LazyStream.t<Token>;
 
   public type Monad<Token, Result> = ?(Result, Input<Token>);
@@ -148,7 +147,7 @@ module {
 
   };
 
-  public func eof<Token, A>(a : A) : Parser<Token,A> {
+  public func eof<Token, A>(a : A) : Parser<Token, A> {
     func input {
       switch input {
         case null (?(a, null));
@@ -206,7 +205,7 @@ module {
   };
 
   public func count<Token, A>(n : Nat, pa : Parser<Token, A>) : Parser<Token, List.List<A>> {
-    if (n > 0) cons(pa, count(n-1, pa))
+    if (n > 0) cons(pa, count(n - 1 : Nat, pa))
     else ret (List.nil<A>()); // needs <A> or constraint.
   };
 
@@ -321,7 +320,7 @@ module {
   };
 
   public func oneOf<Token>(eq : (Token, Token)-> Bool, tokens : [Token]) : Parser<Token, Token>  {
-    satisfy (func (t : Token) : Bool { 
+    satisfy (func (t : Token) : Bool {
       for (t1 in tokens.vals()) {
         if (eq(t, t1)) { return true }
       };
@@ -387,10 +386,10 @@ module {
 
     public func token(t : Text) : Parser<Char, Text> {
       func iter(i : Iter.Iter<Char>) : Parser<Char, Text> {
-          switch (i.next()) {
-            case null (ret t);
-            case (?c) (right(exactly(eq, c), iter i));
-          }
+        switch (i.next()) {
+          case null (ret t);
+          case (?c) (right(exactly(eq, c), iter i));
+        }
       };
       lexeme(iter(t.chars()));
     }
