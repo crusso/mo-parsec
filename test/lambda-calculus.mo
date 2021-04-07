@@ -53,11 +53,11 @@ module Lexer = {
 
   func showToken(tkn : Token) : Text =
     switch(tkn) {
-    case (#lam) "LAM";
-    case (#dot) "DOT";
-    case (#lparen) "LPAREN";
-    case (#rparen) "RPAREN";
-    case (#ident(i)) "IDENT(" # i # ")";
+      case (#lam) "LAM";
+      case (#dot) "DOT";
+      case (#lparen) "LPAREN";
+      case (#rparen) "RPAREN";
+      case (#ident(i)) "IDENT(" # i # ")";
     };
 
 
@@ -79,11 +79,11 @@ module Lexer = {
     };
 
     let token = P.choice([
-          ident(func t { #ident t }),
-          text(".", #dot),
-          text("\\", #lam),
-          text("(", #lparen),
-          text(")", #rparen)]);
+      ident(func t { #ident t }),
+      text(".", #dot),
+      text("\\", #lam),
+      text("(", #lparen),
+      text(")", #rparen)]);
 
     var state = P.LazyStream.ofText(input) ;
 
@@ -109,36 +109,41 @@ class Parser() {
 
   type Parser = P.Parser<Token, Syntax.Term>;
 
-  let ident = P.token(func (t : Token) : ?Text { switch t {
-     case (#ident(i)) ?i;
-     case _ null;
-   }});
+  let ident = P.token<Token, Text>(func (t : Token) : ?Text {
+    switch t {
+      case (#ident(i)) ?i;
+      case _ null;
+    }});
 
-  let lam = P.satisfy(func (t : Token) : Bool { switch t {
-     case (#lam) true;
-     case _ false;
-   }});
+  let lam = P.satisfy<Token>(func (t : Token) : Bool {
+    switch t {
+      case (#lam) true;
+      case _ false;
+    }});
 
-  let dot = P.satisfy(func (t : Token) : Bool { switch t {
-     case (#dot) true;
-     case _ false;
-  }});
+  let dot = P.satisfy<Token>(func (t : Token) : Bool {
+    switch t {
+      case (#dot) true;
+      case _ false;
+    }});
 
-  let lparen = P.satisfy(func (t : Token) : Bool { switch t {
-    case (#lparen) true;
-    case _ false;
-  }});
+  let lparen = P.satisfy<Token>(func (t : Token) : Bool {
+    switch t {
+      case (#lparen) true;
+      case _ false;
+    }});
 
-  let rparen = P.satisfy(func (t : Token) : Bool { switch t {
-    case (#rparen) true;
-    case _ false;
-  }});
+  let rparen = P.satisfy<Token>(func (t : Token) : Bool {
+    switch t {
+      case (#rparen) true;
+      case _ false;
+    }});
 
   func id() : Parser = P.map(ident, Syntax.id);
-  
+
   func parens() : Parser = P.between(lparen, P.delay term, rparen);
-  
-  func lambda() : Parser = 
+
+  func lambda() : Parser =
     P.map(P.pair(P.between(lam, ident, dot), P.delay term),
       func ((v, tm) : (Text,Term)) : Term { Syntax.lambda(v, tm) });
 
@@ -148,7 +153,7 @@ class Parser() {
       id(),
       lambda()
     ]);
-  
+
   public func term() : Parser =
     P.map(P.pair(atom(), P.many(atom())),
       func ((tm, tms) : (Term, List.List<Term>)) : Term {
