@@ -12,7 +12,7 @@ The library and example was implemented primarily to exercise Motoko new type ar
 
 ## API Documentation
 
-API documentation for this library can be found at (CHANGE ME) https://crusso.github.io/mo-parsec/
+API documentation for this library can be found at  https://crusso.github.io/mo-parsec/ (horked)
 
 
 ## Building
