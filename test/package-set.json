@@ -1,8 +1,0 @@
-[
-  {
-    "name": "base",
-    "repo": "git@github.com:dfinity-lab/motoko-base.git",
-    "version": "a44f1b41bf29ba7a7f179fb2c04406c1030fb583",
-    "dependencies": []
-  }
-]
