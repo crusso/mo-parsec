@@ -1,11 +1,3 @@
-MOC ?= ./moc
-PKGS=$(shell vessel sources)
-# we need to specify the output if there is more than one .mo file
-OUT=lambda-calculus.wasm
-
-all:
-	$(MOC) $(PKGS) -wasi-system-api lambda-calculus.mo
-	wasmtime $(OUT)
-
-clean:
-	rm -f $(OUT)
+default:
+	$(shell vessel bin)/moc $(shell vessel sources) -wasi-system-api -o Test.wasm Test.mo && wasmtime Test.wasm
+	rm -f Test.wasm

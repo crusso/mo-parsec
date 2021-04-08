@@ -10,6 +10,11 @@ The library and example was implemented primarily to exercise Motoko new type ar
 * [src](src) contains the [`Parsec`](src/Parsec.mo) library.
 * [test](test) contains a sample lambda calculus lexer and parser that you can run with wasmtime.
 
+## API Documentation
+
+API documentation for this library can be found at (CHANGE ME) https://crusso.github.io/mo-parsec/
+
+
 ## Building
 
 ```
