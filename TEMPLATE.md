@@ -73,4 +73,4 @@ API documentation for this library can be found at (CHANGE ME) https://kritzcree
 
 motoko-library-template is distributed under the terms of the Apache License (Version 2.0).
 
-See LICENSE for details.
+See TEMPLATE-LICENSE for details.
