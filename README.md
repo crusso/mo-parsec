@@ -12,16 +12,20 @@ The library and example was implemented primarily to exercise Motoko new type ar
 
 ## API Documentation
 
-API documentation for this library can be found at  https://crusso.github.io/mo-parsec/ (horked)
+API documentation for this library can be found at  https://crusso.github.io/mo-parsec/.
 
 
-## Building
+## Testing
 
+```bash
+make test
 ```
-cd test; make
-```
 
-to build the sample; you may need to edit the `Makefile` to suit your installation.
+## Example
+
+```bash
+make example
+```
 
 ## Documentation
 
